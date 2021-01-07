@@ -354,7 +354,8 @@ namespace LuxuryHomeMarketing
         //---------------------------------------------------------------------
         private static void LogParseUser(string memberInfo, RequestOption requestOption)
         {
-            Console.WriteLine($"{usersParsed}/{usersTotal} [{requestOption.country}/{requestOption.state}] {memberInfo}");
+            Console.WriteLine($"{usersParsed}/{usersTotal} [{requestOption.country}/{requestOption.state}] {
+                }");
         }
 
         //---------------------------------------------------------------------
