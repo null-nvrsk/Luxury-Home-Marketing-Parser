@@ -16,7 +16,6 @@ namespace LuxuryHomeMarketing
 {
     class LuxuryHomeMarketing
     {
-        //public static List<Member> members = new List<Member>();
         public static Members members = new Members();
         public static QueueRequest queue = new QueueRequest();
 
@@ -50,7 +49,7 @@ namespace LuxuryHomeMarketing
 
 
         //---------------------------------------------------------------------
-        public static string ParseMember(string response, string memberId)
+        public static Member ParseMember(string response, string memberId)
         {
             var parser = new HtmlParser();
             var doc = parser.ParseDocument(response);
@@ -83,13 +82,15 @@ namespace LuxuryHomeMarketing
                         site = site.Replace("http://", "");
                     }
                 }
-                return $"{memberId} - {memberName} - {email}";
+
+                Member member = new Member(memberId, memberName, email, site);
+                return member;
             }
             catch (Exception)
             {
             }
 
-            return "";            
+            return null;            
         }
 
         //---------------------------------------------------------------------
@@ -285,7 +286,16 @@ namespace LuxuryHomeMarketing
                         break;
                     case RequestType.rtMember:
                         response = GetMemberPage(requestOption.memberId);
-                        string memberInfo =  ParseMember(response, requestOption.memberId);
+                        Member member =  ParseMember(response, requestOption.memberId);
+
+                        members.Add(member);
+
+                        //db.AddMember();
+
+                            
+                       
+
+                       // return $"{memberId} - {memberName} - {email}";
                         usersParsed++;
 
                         LogParseUser(memberInfo, requestOption);
