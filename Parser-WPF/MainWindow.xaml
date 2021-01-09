@@ -5,8 +5,131 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Parser_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Luxury Home Marketing Parser" Height="600" Width="800" MinHeight="500" MinWidth="600">
+    <DockPanel>
+        <!-- Status bar -->
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem>
+                <TextBlock Name="lblTimeInfo" Text="Time: 0:00 / -:-" />
+            </StatusBarItem>
+            <Separator Grid.Column="1" />
+            <StatusBarItem Grid.Column="2">
+                <TextBlock Text="Members: 0 found / 0 finished" />
+            </StatusBarItem>
+            <Separator Grid.Column="3" />
+            <StatusBarItem Grid.Column="4" />
+        </StatusBar>
+        <!-- Title -->
+        <Label DockPanel.Dock="Top" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Parser luxuryhomemarketing.com"/>
+
+        <!-- Buttons -->
+        <StackPanel DockPanel.Dock="Top"  Orientation="Horizontal">
+            <Button Margin="5" MinWidth="80">Start</Button>
+            <Button Margin="5" MinWidth="80">stop</Button>
+            <Button Margin="5" MinWidth="80">Reset</Button>
+            <GroupBox Margin="3" Padding="3">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Padding="0 0 10 0">Export to</TextBlock>
+                    <ComboBox Name="exportType"  Width="50" VerticalAlignment="Top">
+                        <TextBlock>Text</TextBlock>
+                        <TextBlock>CSV</TextBlock>
+                        <TextBlock>Excel</TextBlock>
+                    </ComboBox>
+                    <Button Margin="5" MinWidth="80">Export</Button>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Margin="3" Padding="3">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Padding="0 0 10 0">Pause time</TextBlock>
+                    <TextBox Text="5" Width="30"></TextBox>
+                    <TextBlock Padding="0 0 10 0">sec</TextBlock>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+
+            <!-- Members table -->
+            <DockPanel Grid.Row="0" Grid.ColumnSpan="3">
+                <Label DockPanel.Dock="Top" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Members"/>
+                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="5">
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" Margin="5" Name="MemberDataGrid" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="Member Id" Binding="{Binding MemberId}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Web" Binding="{Binding Web}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </DockPanel>
+
+            <!-- Queue 1 -->
+            <DockPanel Grid.Row="1" Grid.Column="0" MinWidth="200" MinHeight="100">
+                <Label DockPanel.Dock="Top" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Queue of member-lists"/>
+                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="5">
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" Margin="5" Name="QueueMemberListDataGrid" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="Member Id" Binding="{Binding MemberId}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Web" Binding="{Binding Web}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Border>
+            </DockPanel>
+
+            <!-- Queue 2 -->
+            <DockPanel Grid.Row="1" Grid.Column="1" MinWidth="150" MinHeight="100">
+                <Label DockPanel.Dock="Top" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Queue of members info"/>
+                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="5">
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" Margin="5" Name="QueueMemberInfoDataGrid" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="Member Id" Binding="{Binding MemberId}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Border>
+            </DockPanel>
+
+            <!-- Log -->
+            <DockPanel Grid.Row="1" Grid.Column="2" MinHeight="100" MinWidth="200">
+                <Label DockPanel.Dock="Top" Grid.Row="0" Grid.ColumnSpan="3" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Log"/>
+                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="5">
+                    <RichTextBox ></RichTextBox>
+                </Border>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
 </Window>

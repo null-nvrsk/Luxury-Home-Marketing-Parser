@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Parser_WPF.Data;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +16,23 @@ namespace Parser_WPF
     /// </summary>
     public partial class App : Application
     {
+        private ServiceProvider serviceProvider;
+        public App()
+        {
+            ServiceCollection services = new ServiceCollection();
+            services.AddDbContext<MemberDbContext>(option =>
+            {
+                option.UseSqlite("Data Source = Members.sqlite");
+            });
+
+            services.AddSingleton<MainWindow>();
+
+            serviceProvider = services.BuildServiceProvider();
+        }
+        private void OnStartup(object s, StartupEventArgs e)
+        {
+            var mainWindow = serviceProvider.GetService<MainWindow>();
+            mainWindow.Show();
+        }
     }
 }

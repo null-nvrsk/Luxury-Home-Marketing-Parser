@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Parser_WPF.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,21 @@ namespace Parser_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        MemberDbContext dbContext;
+
+        public MainWindow(MemberDbContext dbContext)
         {
+            this.dbContext = dbContext;
+
             InitializeComponent();
+
+            GetMembers();
+        }
+        private void GetMembers()
+        {
+            MemberDataGrid.ItemsSource = dbContext.Members.ToList();
+            QueueMemberListDataGrid.ItemsSource = dbContext.SearchMemberLists.ToList();
+            QueueMemberInfoDataGrid.ItemsSource = dbContext.SearchMemberInfos.ToList();        
         }
     }
 }
