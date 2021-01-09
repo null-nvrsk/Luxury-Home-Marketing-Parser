@@ -40,7 +40,7 @@
         <StackPanel DockPanel.Dock="Top"  Orientation="Horizontal">
             <Button Margin="5" MinWidth="80">Start</Button>
             <Button Margin="5" MinWidth="80">stop</Button>
-            <Button Margin="5" MinWidth="80">Reset</Button>
+            <Button Margin="5" MinWidth="80" Click="Reset_Click">Reset</Button>
             <GroupBox Margin="3" Padding="3">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Padding="0 0 10 0">Export to</TextBlock>

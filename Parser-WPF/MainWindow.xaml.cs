@@ -37,5 +37,11 @@ namespace Parser_WPF
             QueueMemberListDataGrid.ItemsSource = dbContext.SearchMemberLists.ToList();
             QueueMemberInfoDataGrid.ItemsSource = dbContext.SearchMemberInfos.ToList();        
         }
+
+        private void Reset_Click(object sender, RoutedEventArgs e)
+        {
+            dbContext.Database.EnsureDeleted();   // удаляем бд
+            dbContext.Database.EnsureCreated();   // создаем бд с новой схемой
+        }
     }
 }
