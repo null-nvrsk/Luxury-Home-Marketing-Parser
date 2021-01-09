@@ -184,6 +184,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Base\NamedAbbrEntity.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MemberLevel.cs" />

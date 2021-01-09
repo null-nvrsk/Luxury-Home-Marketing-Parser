@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Parser_WPF.Models
+namespace Parser_WPF.Models.Base
 {
-    public class SearchMemberInfo
+    public class NamedAbbrEntity
     {
-        [Key]
-        public int QueueId { get; set; }
+        public int Id { get; set; }
+        public string Abbreviation { get; set; }
         [Required]
-        public string Member { get; set; }
+        public string Name { get; set; }
     }
 }
