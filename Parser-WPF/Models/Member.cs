@@ -14,7 +14,7 @@ namespace Parser_WPF.Models
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        public string MemberId { get; set; }
+        public string PublicId { get; set; }
         [Required]
         public string Name { get; set; }
         public string Email { get; set; }

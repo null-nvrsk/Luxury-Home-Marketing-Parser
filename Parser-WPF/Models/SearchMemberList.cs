@@ -12,10 +12,8 @@ namespace Parser_WPF.Models
         [Key]
         public int QueueId { get; set; }
         [Required]
-        //public int CountryId { get; set; }
-        public string CountryAbbreviation { get; set; }
-        //public int StateId { get; set; }
-        public string StateAbbreviation { get; set; }
+        public Country Country { get; set; }
+        public State State { get; set; }
         public string MemberLevelId { get; set; }
     }
 }

@@ -12,6 +12,6 @@ namespace Parser_WPF.Models
         [Key]
         public int QueueId { get; set; }
         [Required]
-        public string Member { get; set; }
+        public Member Member { get; set; }
     }
 }

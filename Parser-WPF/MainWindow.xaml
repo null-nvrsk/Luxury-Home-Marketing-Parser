@@ -83,7 +83,7 @@
                     <DataGrid Grid.Row="1" AutoGenerateColumns="False" Margin="5" Name="MemberDataGrid" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Header="Member Id" Binding="{Binding MemberId}"/>
+                            <DataGridTextColumn Header="Member Id" Binding="{Binding PublicId}"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
                             <DataGridTextColumn Header="Web" Binding="{Binding Web}"/>
