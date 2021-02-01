@@ -28,159 +28,159 @@ namespace LuxuryHomeMarketing
         public static int usersParsed = 0;
 
         //---------------------------------------------------------------------
-        public static string GetMemberPage(string user)
-        {
-            string response = "";
-            string url = $"https://www.luxuryhomemarketing.com/members/member_{user}.html";
+        //public static string GetMemberPage(string user)
+        //{
+        //    string response = "";
+        //    string url = $"https://www.luxuryhomemarketing.com/members/member_{user}.html";
 
-            HttpRequest request = CreateHttpRequest();
+        //    HttpRequest request = CreateHttpRequest();
 
-            try
-            {
-                response = request.Get(url).ToString();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Connection error: {ex.Message}");
-            }            
+        //    try
+        //    {
+        //        response = request.Get(url).ToString();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Connection error: {ex.Message}");
+        //    }            
             
-            return response;
+        //    return response;
         }
 
 
         //---------------------------------------------------------------------
-        public static Member ParseMember(string response, string memberId)
-        {
-            var parser = new HtmlParser();
-            var doc = parser.ParseDocument(response);
+        //public static Member ParseMember(string response, string memberId)
+        //{
+        //    var parser = new HtmlParser();
+        //    var doc = parser.ParseDocument(response);
 
-            try
-            {
-                string memberName = doc.QuerySelector("h1").InnerHtml;
-                char[] charsToTrim = { '-', ' ' };
-                memberName = memberName.Trim(charsToTrim);
+        //    try
+        //    {
+        //        string memberName = doc.QuerySelector("h1").InnerHtml;
+        //        char[] charsToTrim = { '-', ' ' };
+        //        memberName = memberName.Trim(charsToTrim);
 
-                string email = "";
-                string site = "";
+        //        string email = "";
+        //        string site = "";
 
-                var cells = doc.QuerySelectorAll("p.row.link-list.text-center > a");
-                foreach (var cell in cells)
-                {
-                    string title = cell.TextContent;
+        //        var cells = doc.QuerySelectorAll("p.row.link-list.text-center > a");
+        //        foreach (var cell in cells)
+        //        {
+        //            string title = cell.TextContent;
 
-                    // найти почту
-                    if (title == "Email Me")
-                    {
-                        email = cell.GetAttribute("href");
-                        email = email.Replace("mailto:", "");
-                    }
+        //            // найти почту
+        //            if (title == "Email Me")
+        //            {
+        //                email = cell.GetAttribute("href");
+        //                email = email.Replace("mailto:", "");
+        //            }
 
-                    // найти сайт
-                    if (title == "Visit My Website")
-                    {
-                        site = cell.GetAttribute("href");
-                        site = site.Replace("http://", "");
-                    }
-                }
+        //            // найти сайт
+        //            if (title == "Visit My Website")
+        //            {
+        //                site = cell.GetAttribute("href");
+        //                site = site.Replace("http://", "");
+        //            }
+        //        }
 
-                Member member = new Member(memberId, memberName, email, site);
-                return member;
-            }
-            catch (Exception)
-            {
-            }
+        //        Member member = new Member(memberId, memberName, email, site);
+        //        return member;
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
 
-            return null;            
-        }
+        //    return null;            
+        //}
 
         //---------------------------------------------------------------------
         // Обработка поиска по стране
-        public static string GetSearchResult(string country)
-        {
-            string response = "";
-            try
-            {
-                HttpRequest request = CreateHttpRequest();
+        //public static string GetSearchResult(string country)
+        //{
+        //    string response = "";
+        //    try
+        //    {
+        //        HttpRequest request = CreateHttpRequest();
 
-                var reqParams = new RequestParams();
-                reqParams["Country"] = country;
+        //        var reqParams = new RequestParams();
+        //        reqParams["Country"] = country;
 
-                response = request.Post(searchUrl, reqParams).ToString();
+        //        response = request.Post(searchUrl, reqParams).ToString();
 
-            }
-            catch (Exception ex)
-            {
-                ShowError(ex);
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ShowError(ex);
+        //    }
                       
-            return response;
-        }
+        //    return response;
+        //}
 
         //---------------------------------------------------------------------
         // Обработка поиска по штату
-        public static string GetSearchResult(string country, string state)
-        {
-            string response = "";
-            try
-            {
-                HttpRequest request = CreateHttpRequest(); 
+        //public static string GetSearchResult(string country, string state)
+        //{
+        //    string response = "";
+        //    try
+        //    {
+        //        HttpRequest request = CreateHttpRequest(); 
 
-                var reqParams = new RequestParams();
-                reqParams["Country"] = country;
-                reqParams["State_prov"] = state;
-                response = request.Post(searchUrl, reqParams).ToString();
+        //        var reqParams = new RequestParams();
+        //        reqParams["Country"] = country;
+        //        reqParams["State_prov"] = state;
+        //        response = request.Post(searchUrl, reqParams).ToString();
 
-            }
-            catch (Exception ex)
-            {
-                ShowError(ex);                
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ShowError(ex);                
+        //    }
 
-            return response;
-        }        
+        //    return response;
+        //}        
         
         //---------------------------------------------------------------------
         // Обработка поиска по уровню членства
-        public static string GetSearchResult(string country, string state, MemberLevel level)
-        {
-            string response = "";
-            try
-            {
-                string designation = "";
-                switch (level)
-                {
-                    case MemberLevel.mlMember:
-                        designation = "M";
-                        break;
-                    case MemberLevel.mlCLHMS:
-                        designation = "C";
-                        break;
-                    case MemberLevel.mlGuild:
-                        designation = "G";
-                        break;
-                    case MemberLevel.mlAffiliate:
-                        designation = "A";
-                        break;
-                }
+        //public static string GetSearchResult(string country, string state, MemberLevel level)
+        //{
+        //    string response = "";
+        //    try
+        //    {
+        //        string designation = "";
+        //        switch (level)
+        //        {
+        //            case MemberLevel.mlMember:
+        //                designation = "M";
+        //                break;
+        //            case MemberLevel.mlCLHMS:
+        //                designation = "C";
+        //                break;
+        //            case MemberLevel.mlGuild:
+        //                designation = "G";
+        //                break;
+        //            case MemberLevel.mlAffiliate:
+        //                designation = "A";
+        //                break;
+        //        }
 
-                HttpRequest request = CreateHttpRequest();
+        //        HttpRequest request = CreateHttpRequest();
 
-                var reqParams = new RequestParams();
-                reqParams["Country"] = country;
-                reqParams["State_prov"] = state;
-                reqParams["designation[]"] = designation;
+        //        var reqParams = new RequestParams();
+        //        reqParams["Country"] = country;
+        //        reqParams["State_prov"] = state;
+        //        reqParams["designation[]"] = designation;
 
 
-                response = request.Post(searchUrl, reqParams).ToString();
+        //        response = request.Post(searchUrl, reqParams).ToString();
 
-            }
-            catch (Exception ex)
-            {
-                ShowError(ex);
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ShowError(ex);
+        //    }
 
-            return response;
-        }
+        //    return response;
+        //}
 
         //---------------------------------------------------------------------
         public static int ParseSearchResult(string response, RequestType type)
@@ -359,12 +359,12 @@ namespace LuxuryHomeMarketing
         }
 
         //---------------------------------------------------------------------
-        private static void ShowError(Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-            Console.WriteLine($"Exception: {ex.InnerException}");
-            // Console.WriteLine($"Stack: {ex.StackTrace}");
-        }
+        //private static void ShowError(Exception ex)
+        //{
+        //    Console.WriteLine($"Error: {ex.Message}");
+        //    Console.WriteLine($"Exception: {ex.InnerException}");
+        //    // Console.WriteLine($"Stack: {ex.StackTrace}");
+        //}
 
         //---------------------------------------------------------------------
         // создаем объект запроса с необходимыми параметрами

@@ -21,6 +21,7 @@ namespace Parser_WPF.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Member>().HasIndex(i => i.PublicId).IsUnique();
             modelBuilder.Entity<Member>().HasData(GetProducts());
 
             modelBuilder.Entity<State>();

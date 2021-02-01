@@ -23,6 +23,8 @@ namespace Parser_WPF
     {
         MemberDbContext dbContext;
 
+
+
         public MainWindow(MemberDbContext dbContext)
         {
             this.dbContext = dbContext;
@@ -38,10 +40,18 @@ namespace Parser_WPF
             QueueMemberInfoDataGrid.ItemsSource = dbContext.SearchMemberInfos.ToList();        
         }
 
+
+
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
             dbContext.Database.EnsureDeleted();   // удаляем бд
             dbContext.Database.EnsureCreated();   // создаем бд с новой схемой
+        }
+
+        private void ButtonStart_Click(object sender, RoutedEventArgs e)
+        {
+            // 
+
         }
     }
 }

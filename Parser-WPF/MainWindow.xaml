@@ -38,7 +38,7 @@
 
         <!-- Buttons -->
         <StackPanel DockPanel.Dock="Top"  Orientation="Horizontal">
-            <Button Margin="5" MinWidth="80">Start</Button>
+            <Button x:Name="ButtonStart" Margin="5" MinWidth="80" Click="ButtonStart_Click">Start</Button>
             <Button Margin="5" MinWidth="80">stop</Button>
             <Button Margin="5" MinWidth="80" Click="Reset_Click">Reset</Button>
             <GroupBox Margin="3" Padding="3">
