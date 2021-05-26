@@ -10,7 +10,7 @@ namespace Parser_WPF.Models
 {
     public class Member
     {
-        public Member(string PublicId, string Name, string Email = "", string Web = "")
+        public Member(string PublicId, string Name = "", string Email = "", string Web = "")
         {
             this.PublicId = PublicId;
             this.Name = Name;

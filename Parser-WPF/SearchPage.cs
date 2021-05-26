@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using AngleSharp.Html.Parser;
 using Leaf.xNet;
 using Parser_WPF.Interfaces;
 using Parser_WPF.Models;
@@ -13,7 +16,7 @@ namespace Parser_WPF
 
     public class SearchPage : ISearchPage
     {
-        
+        static HtmlParser parser;
 
         static string searchUrl = "https://www.luxuryhomemarketing.com/real-estate-agents/advanced_search.html";
 
@@ -26,7 +29,6 @@ namespace Parser_WPF
             try
             {
                 var request = new HttpRequest();
-
                 var reqParams = new RequestParams();
                 reqParams["Country"] = country.Abbreviation;
 
@@ -114,6 +116,44 @@ namespace Parser_WPF
             Console.WriteLine($"Error: {ex.Message}");
             Console.WriteLine($"Exception: {ex.InnerException}");
             // Console.WriteLine($"Stack: {ex.StackTrace}");
+        }
+
+        Collection<Member> ParsePage(string response)
+        {
+            Collection<Member> members = new Collection<Member>();
+            
+            var doc = parser.ParseDocument(response);
+
+            var cells = doc.QuerySelectorAll("div.row.member");
+            foreach (var cell in cells)
+            { 
+                var linkMember = cell.QuerySelector("a.link-member");
+
+                string url = linkMember.GetAttribute("href");
+                string memberId = url.Replace("../members/member_", "");
+                memberId = memberId.Replace(".html", "");
+
+                members.Add(new Member(memberId));
+            }
+
+            // Возвращаем количество найденных пользователей
+            return members;
+        }
+
+        public bool ParseToManyResultError(string response)
+        {
+            var doc = parser.ParseDocument(response);
+
+            var cells = doc.QuerySelectorAll("div.row.member");
+            // Если поисковый запрос слишком широкий
+            // Sorry that search is too broad. Please be more specific.
+            cells = doc.QuerySelectorAll("p");
+            foreach (var cell in cells)
+            {
+                if (cell.InnerHtml == "Sorry that search is too broad. Please be more specific.") return true;
+            }
+
+            return false;
         }
     }
 }

@@ -183,47 +183,47 @@ namespace LuxuryHomeMarketing
         //}
 
         //---------------------------------------------------------------------
-        public static int ParseSearchResult(string response, RequestType type)
-        {
-            int count = 0;
-            var parser = new HtmlParser();
-            var doc = parser.ParseDocument(response);
+        //public static int ParseSearchResult(string response, RequestType type)
+        //{
+        //    int count = 0;
+        //    var parser = new HtmlParser();
+        //    var doc = parser.ParseDocument(response);
    
-            // var cells = doc.QuerySelectorAll("p.row.link-list.text-center");
-            var cells = doc.QuerySelectorAll("div.row.member");
-            foreach (var cell in cells)
-            {
-                var linkMember = cell.QuerySelector("a.link-member");
+        //    // var cells = doc.QuerySelectorAll("p.row.link-list.text-center");
+        //    var cells = doc.QuerySelectorAll("div.row.member");
+        //    foreach (var cell in cells)
+        //    {
+        //        var linkMember = cell.QuerySelector("a.link-member");
 
-                string url = linkMember.GetAttribute("href");
-                string memberId = url.Replace("../members/member_", "");
-                memberId = memberId.Replace(".html", "");
+        //        string url = linkMember.GetAttribute("href");
+        //        string memberId = url.Replace("../members/member_", "");
+        //        memberId = memberId.Replace(".html", "");
 
-                // Добавляем в очередь страницы найденых ползоваетелей
-                RequestOption requestOption = new RequestOption(memberId, RequestType.rtMember);
-                queue.Enqueue(requestOption);
-                count++;
-            }
+        //        // Добавляем в очередь страницы найденых ползоваетелей
+        //        RequestOption requestOption = new RequestOption(memberId, RequestType.rtMember);
+        //        queue.Enqueue(requestOption);
+        //        count++;
+        //    }
 
-            // Если поисковый запрос слишком широкий, бозвращаем -1
-            // Sorry that search is too broad. Please be more specific.
-            cells = doc.QuerySelectorAll("p");
-            foreach (var cell in cells)
-            {
-                if (cell.InnerHtml == "Sorry that search is too broad. Please be more specific.")
-                {
+        //    // Если поисковый запрос слишком широкий, бозвращаем -1
+        //    // Sorry that search is too broad. Please be more specific.
+        //    cells = doc.QuerySelectorAll("p");
+        //    foreach (var cell in cells)
+        //    {
+        //        if (cell.InnerHtml == "Sorry that search is too broad. Please be more specific.")
+        //        {
                     if (type == RequestType.rtMemberLevel)
                     {
                         MessageBox.Show("слишком широкий запрос даже на самом нижнем уровне.\n" +
                             "Не все пользователи будут отработаны!");
                     }
-                    return -1;
-                }   
-            }
+        //            return -1;
+        //        }   
+        //    }
 
-            // Возвращаем количество найденных пользователей
-            return count;
-        }
+        //    // Возвращаем количество найденных пользователей
+        //    return count;
+        //}
 
         //---------------------------------------------------------------------
         // Единожды запускаем процесс обработки очереди

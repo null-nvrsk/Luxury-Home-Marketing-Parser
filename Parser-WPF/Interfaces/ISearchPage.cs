@@ -1,4 +1,6 @@
-﻿using Parser_WPF.Models;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Parser_WPF.Models;
 
 namespace Parser_WPF.Interfaces
 {
@@ -12,6 +14,10 @@ namespace Parser_WPF.Interfaces
 
         string GetPageWithMembershipResults(MemberLevel memberLevel);
         string ParsePageMembership(MemberLevel memberLevel);
+
+        Collection<Member> ParsePage(string response);
+
+        bool ParseToManyResultError(string response);
 
     }
 }
